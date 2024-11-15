@@ -1,24 +1,25 @@
-import logo from './logo.svg';
+// App.js
 import './App.css';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { AnimatePresence } from 'framer-motion';
+import SchedulerWrapper from './components/SchedulerWrapper';
+import { AuthProvider } from './contexts/AuthContext';
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <AuthProvider>
+    <Router>
+      <div className="min-h-screen bg-gradient-to-b from-blue-50 to-purple-50">
+        <AnimatePresence mode="wait">
+          <Routes>
+            <Route path="/" element={<SchedulerWrapper />} />
+            <Route path="/:date" element={<SchedulerWrapper />} />
+          </Routes>
+        </AnimatePresence>
+      </div>
+    </Router>
+    </AuthProvider>
   );
 }
 
